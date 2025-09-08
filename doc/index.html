@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc_new.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>ttm</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ttm</code></h1>
+<p>Temp Table Manager</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#add">add (t_key, key, value, ttl)</a></td>
+	<td class="summary">Добавление (или обновление) записи</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#try_once">try_once (t_key, key, ttl)</a></td>
+	<td class="summary">Проверка/регистрация одноразового действия</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#time_left">time_left (t_key, key)</a></td>
+	<td class="summary">Возвращает оставшееся время до истечения записи</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#exists">exists (t_key, key)</a></td>
+	<td class="summary">Проверка существования активной записи</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get">get (t_key, key)</a></td>
+	<td class="summary">Проверка значения записи, если она активна</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#delete">delete (t_key, key)</a></td>
+	<td class="summary">Удаление записи</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sweep">sweep ()</a></td>
+	<td class="summary">Очистка устаревших записей</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_stats">get_stats ()</a></td>
+	<td class="summary">Получение статистики</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "add"></a>
+    <strong>add (t_key, key, value, ttl)</strong>
+    </dt>
+    <dd>
+    Добавление (или обновление) записи
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t_key</span>
+         (string) - Имя логической записи
+        </li>
+        <li><span class="parameter">key</span>
+         (string) - Ключ записи
+        </li>
+        <li><span class="parameter">value</span>
+         (any) - Значение (по умолчанию true)
+        </li>
+        <li><span class="parameter">ttl</span>
+         (number) - TTL в секундах
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean - true если добавлено впервые, false если запись ещё жива
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "try_once"></a>
+    <strong>try_once (t_key, key, ttl)</strong>
+    </dt>
+    <dd>
+    Проверка/регистрация одноразового действия
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t_key</span>
+         (string) - Имя логической записи
+        </li>
+        <li><span class="parameter">key</span>
+         (string) - Ключ записи
+        </li>
+        <li><span class="parameter">ttl</span>
+         (number) - TTL в секундах
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean - true если разрешено, false если еще рано
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "time_left"></a>
+    <strong>time_left (t_key, key)</strong>
+    </dt>
+    <dd>
+    Возвращает оставшееся время до истечения записи
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t_key</span>
+         (string) - Имя логической записи
+        </li>
+        <li><span class="parameter">key</span>
+         (string) - Ключ записи
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number|nil - Секунды до истечения или nil если запись не найдена
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "exists"></a>
+    <strong>exists (t_key, key)</strong>
+    </dt>
+    <dd>
+    Проверка существования активной записи
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t_key</span>
+         (string) - Имя логической записи
+        </li>
+        <li><span class="parameter">key</span>
+         (string) - Ключ записи
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean - true если запись существует и не истекла
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get"></a>
+    <strong>get (t_key, key)</strong>
+    </dt>
+    <dd>
+    Проверка значения записи, если она активна
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t_key</span>
+         string - Имя логической записи
+        </li>
+        <li><span class="parameter">key</span>
+         string - Ключ записи
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        any|nil - Значение записи или nil если не найдена/истекла
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "delete"></a>
+    <strong>delete (t_key, key)</strong>
+    </dt>
+    <dd>
+    Удаление записи
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t_key</span>
+         (string) - Имя логической записи
+        </li>
+        <li><span class="parameter">key</span>
+         (string) - Ключ записи
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean - true если запись была удалена
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sweep"></a>
+    <strong>sweep ()</strong>
+    </dt>
+    <dd>
+    Очистка устаревших записей
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_stats"></a>
+    <strong>get_stats ()</strong>
+    </dt>
+    <dd>
+    Получение статистики
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table - общая статистика и по логическим таблицам
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2025-09-08 18:27:07 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
